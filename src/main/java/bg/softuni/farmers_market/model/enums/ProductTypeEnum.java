@@ -1,12 +1,12 @@
 package bg.softuni.farmers_market.model.enums;
 
 public enum ProductTypeEnum {
-    TOMATOE,
+    TOMATO,
     CUCUMBER,
     PEPPER,
     EGGPLANT,
     ONION,
-    POTATOE,
+    POTATO,
     CORN,
     OTHERS
 }
