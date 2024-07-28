@@ -15,6 +15,9 @@ public class PictureEntity {
     @Column(name = "url", nullable = false)
     private String url;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private OfferEntity offer;
+
     public Long getId() {
         return id;
     }
@@ -42,4 +45,12 @@ public class PictureEntity {
         return this;
     }
 
+    public OfferEntity getOffer() {
+        return offer;
+    }
+
+    public PictureEntity setOffer(OfferEntity offer) {
+        this.offer = offer;
+        return this;
+    }
 }

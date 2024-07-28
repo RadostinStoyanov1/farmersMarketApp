@@ -2,6 +2,10 @@ package bg.softuni.farmers_market.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "offers")
 public class OfferEntity {
@@ -17,8 +21,8 @@ public class OfferEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
-    @OneToOne
-    private PictureEntity picture;
+    @OneToMany(targetEntity = PictureEntity.class, mappedBy = "offer")
+    private List<PictureEntity> pictures;
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
@@ -28,6 +32,7 @@ public class OfferEntity {
 
     public OfferEntity() {
         likes = 0l;
+        pictures = new ArrayList<>();
     }
 
     public Long getId() {
@@ -75,21 +80,21 @@ public class OfferEntity {
         return this;
     }
 
-    public PictureEntity getPicture() {
-        return picture;
-    }
-
-    public OfferEntity setPicture(PictureEntity picture) {
-        this.picture = picture;
-        return this;
-    }
-
     public Long getLikes() {
         return likes;
     }
 
     public OfferEntity setLikes(Long likes) {
         this.likes = likes;
+        return this;
+    }
+
+    public List<PictureEntity> getPictures() {
+        return pictures;
+    }
+
+    public OfferEntity setPictures(List<PictureEntity> pictures) {
+        this.pictures = pictures;
         return this;
     }
 }
