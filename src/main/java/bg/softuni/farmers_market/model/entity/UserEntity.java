@@ -1,9 +1,11 @@
 package bg.softuni.farmers_market.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -11,10 +13,14 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @UuidGenerator
+    private UUID uuid;
     @Column(nullable = false, unique = true)
     private String username;
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
     @Column(unique = true)
     private String email;
     @Column(nullable = false)
@@ -52,12 +58,30 @@ public class UserEntity {
         return this;
     }
 
-    public String getFullName() {
-        return fullName;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public UserEntity setFullName(String fullName) {
-        this.fullName = fullName;
+    public UserEntity setUuid(UUID uuid) {
+        this.uuid = uuid;
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public UserEntity setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserEntity setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
