@@ -13,7 +13,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @UuidGenerator
+    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     private UUID uuid;
     @Column(nullable = false, unique = true)
     private String username;
