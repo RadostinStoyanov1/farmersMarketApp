@@ -5,7 +5,6 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -13,8 +12,6 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
-    private UUID uuid;
     @Column(nullable = false, unique = true)
     private String username;
     @Column(name = "first_name", nullable = false)
@@ -55,15 +52,6 @@ public class UserEntity {
 
     public UserEntity setUsername(String username) {
         this.username = username;
-        return this;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public UserEntity setUuid(UUID uuid) {
-        this.uuid = uuid;
         return this;
     }
 

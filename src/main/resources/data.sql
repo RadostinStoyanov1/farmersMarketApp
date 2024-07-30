@@ -1,10 +1,10 @@
 USE farmers_market;
 
-alter table `users` modify column uuid varbinary(36);
+/*alter table `users` modify column uuid varbinary(36);*/
 
-INSERT INTO `users` (`id`, `username`, `email`, `first_name`, `last_name`, `password`, `uuid`)
+INSERT INTO `users` (`id`, `username`, `email`, `first_name`, `last_name`, `password`)
 VALUES
-    (1, 'Rado', 'rado@rado.com','Radostin','Stoyanov','$2a$10$7SVR.r7RMpo0Q/ySmi.EneuCg5FYiHAR1ovcgN0DRso9NxGJhG/TS','3fd4b7bf-f5fc-4c53-a7c6-1520560d3c71');
+    (1, 'Rado', 'rado@rado.com','Radostin','Stoyanov','$2a$10$7SVR.r7RMpo0Q/ySmi.EneuCg5FYiHAR1ovcgN0DRso9NxGJhG/TS');
 
 INSERT INTO roles (id, role)
 VALUES (1, 'ADMIN');

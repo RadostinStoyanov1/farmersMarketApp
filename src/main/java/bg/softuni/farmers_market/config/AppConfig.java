@@ -15,10 +15,6 @@ import javax.sql.DataSource;
 
 @Configuration
 public class AppConfig {
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public ModelMapper mapper() {
