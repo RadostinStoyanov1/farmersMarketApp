@@ -4,7 +4,7 @@ USE farmers_market;
 
 INSERT INTO `users` (`id`, `username`, `email`, `first_name`, `last_name`, `password`)
 VALUES
-    (1, 'Rado', 'rado@rado.com','Radostin','Stoyanov','$2a$10$7SVR.r7RMpo0Q/ySmi.EneuCg5FYiHAR1ovcgN0DRso9NxGJhG/TS');
+    (1, 'Rado', 'rado@rado.com','Radostin','Stoyanov','9af4ed36dbea8dad496d0f74d398024941e40cf832f0ae6200a6b29b246795050af4c2fd12ec9ba6d7e93d15560441bc');
 
 INSERT INTO roles (id, role)
 VALUES (1, 'ADMIN');

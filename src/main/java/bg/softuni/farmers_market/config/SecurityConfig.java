@@ -19,13 +19,14 @@ public class SecurityConfig {
                         authorizeRequests ->
                                 authorizeRequests
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                        .requestMatchers("/", "/users/login", "/users/register", "/error").permitAll()
+                                        .requestMatchers("/", "/users/login", "/users/register", "/error", "/users/login-error").permitAll()
                                         .anyRequest()
                                         .authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/users/login")
+                                .loginProcessingUrl("/users/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/", true)
