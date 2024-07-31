@@ -5,10 +5,10 @@ import bg.softuni.farmers_market.model.entity.UserRoleEntity;
 import bg.softuni.farmers_market.model.enums.UserRoleEnum;
 import bg.softuni.farmers_market.model.user.FarmersUserDetails;
 import bg.softuni.farmers_market.repository.UserRepository;
-import bg.softuni.farmers_market.service.UserDetailsService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserDetailsServiceImpl implements UserDetailsService {

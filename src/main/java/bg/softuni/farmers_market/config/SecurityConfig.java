@@ -26,11 +26,10 @@ public class SecurityConfig {
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/users/login")
-                                .loginProcessingUrl("/users/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/", true)
-                                .failureForwardUrl("/users/login-error")
+                                .failureUrl("/users/login-error")
                 )
                 .logout(
                         logout ->
