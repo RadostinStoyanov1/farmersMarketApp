@@ -1,6 +1,5 @@
 package bg.softuni.farmers_market.config;
 
-import bg.softuni.farmers_market.repository.ProductTypeRepository;
 import bg.softuni.farmers_market.repository.UserRoleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
