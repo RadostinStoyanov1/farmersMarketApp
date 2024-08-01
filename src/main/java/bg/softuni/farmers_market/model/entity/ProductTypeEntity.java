@@ -16,4 +16,22 @@ public class ProductTypeEntity {
     @Column(unique = true, name = "product_type")
     @Enumerated(EnumType.STRING)
     private ProductTypeEnum productType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public ProductTypeEntity setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public ProductTypeEnum getProductType() {
+        return productType;
+    }
+
+    public ProductTypeEntity setProductType(ProductTypeEnum productType) {
+        this.productType = productType;
+        return this;
+    }
 }

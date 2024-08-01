@@ -3,6 +3,7 @@ package bg.softuni.farmers_market.service;
 import bg.softuni.farmers_market.model.dto.AddOfferDTO;
 import bg.softuni.farmers_market.model.dto.OfferDetailsDTO;
 import bg.softuni.farmers_market.model.dto.OfferSummaryDTO;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 

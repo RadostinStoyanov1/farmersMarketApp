@@ -44,5 +44,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-
+    public UserEntity getUserByUsername(String username) {
+        return userRepository.findByUsername(username).get();
+    }
 }

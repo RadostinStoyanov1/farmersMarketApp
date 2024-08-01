@@ -5,12 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class AddOfferDTO {
-    @NotBlank
+    @NotNull
     private ProductTypeEnum productType;
     private String description;
     @NotBlank
     private String name;
-    @NotBlank
     private Long author;
 
     public ProductTypeEnum getProductType() {
