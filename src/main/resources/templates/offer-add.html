@@ -48,20 +48,18 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="title" class="text-white font-weight-bold">Title</label>
-                <input id="title" type="text" min=3 max=40 class="form-control"
+                <input id="title" type="text" required minlength="3" maxlength="40" class="form-control"
                        placeholder="Offer Title"
                        th:field="*{name}"
                        th:errorclass="is-invalid"
                 />
-                <p class="invalid-feedback errors alert alert-danger">
-                    Manufacturing year is required.
-                </p>
+                <small th:errors="*{name}" class="invalid-feedback errors alert alert-danger" >Offer title should not be empty</small>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" th:for="productType">Product Type</label>
                 <select th:field="*{productType}"
                         th:errorclass="is-invalid"
-                        class="form-control">
+                        class="form-control" required>
                     <option value="">- Select product type -</option>
                     <option
                             th:each="type: ${allProductTypes}"
@@ -70,9 +68,7 @@
                     > Product type
                     </option>
                 </select>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Transmission type is required.
-                </p>
+                <small th:errors="*{productType}" class="invalid-feedback errors alert alert-danger" >Product type should be selected</small>
             </div>
         </div>
         <!--<div class="row">
