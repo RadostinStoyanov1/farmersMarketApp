@@ -79,6 +79,7 @@ public class OfferServiceImpl implements OfferService {
         }
 
         OfferSummaryDTO offerSummaryDTO = new OfferSummaryDTO();
+        offerSummaryDTO.setId(offerDTO.getId());
         offerSummaryDTO.setPictureUrl(pictureUrl);
         offerSummaryDTO.setName(offerDTO.getName());
         offerSummaryDTO.setProductType(offerDTO.getProductType());

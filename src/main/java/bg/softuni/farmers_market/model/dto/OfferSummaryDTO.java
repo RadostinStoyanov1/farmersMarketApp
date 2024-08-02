@@ -3,11 +3,21 @@ package bg.softuni.farmers_market.model.dto;
 import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 
 public class OfferSummaryDTO {
+    private Long id;
     private String name;
     private ProductTypeEnum productType;
     private String authorName;
     private Long likes;
     private String pictureUrl;
+
+    public Long getId() {
+        return id;
+    }
+
+    public OfferSummaryDTO setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
         return name;
