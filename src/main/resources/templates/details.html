@@ -17,31 +17,42 @@
 
 <div class="container-fluid">
     <h2 class="text-center text-white mt-5">Details</h2>
-    <div class="offers row mx-auto d-flex flex-row justify-content-center">
+    <div th:object="${offerDetails}" class="offers row mx-auto d-flex flex-row justify-content-center">
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0" >
 
             <div class="card-body pb-1">
                 <h5 class="card-title">
-                    Offer year Brand name Model name</h5>
+                    <th:block th:text="${offerDetails.getName()}"></th:block></h5>
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"><span>• Mileage</span></div>
-                    <div class="card-text"><span>• Price</span></div>
-                    <div class="card-text"><span>• Engine type</span></div>
-                    <div class="card-text"><span>• Transmission type</span></div>
-                    <div class="card-text"><span>• Offer created</span></div>
-                    <div class="card-text"><span>• Offer modified</span></div>
-                    <div class="card-text"><span>• Seller - First and Last name</span></div>
+                    <div class="card-text"><span>• Product type: <th:block th:text="${offerDetails.getProductType()}"></th:block></span></div>
+                    <div class="card-text"><span>• Description: <th:block th:text="${offerDetails.getDescription()}"></th:block></span></div>
+                    <div class="card-text"><span>• Author: <th:block th:text="${offerDetails.getAuthorFullName()}"></th:block></span></div>
+                    <div class="card-text"><span>• Likes: <th:block th:text="${offerDetails.getLikes()}"></th:block></span></div>
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" href="/">Update</a>
+                <a class="card-link" href="/">Like</a>
                 <a class="card-link" href="/">Delete</a>
+                <span class="col-auto ml-auto"> Upload picture:</span>
+                <form class="d-inline-block" th:action="@{/offers/upload-picture}" method="POST" th:object="${uploadPictureDTO}" enctype="multipart/form-data">
+                    <input type="hidden" name="id" id="offerId" th:value="${offerDetails.id}">
+                    <div class="image-upload d-inline-block">
+                        <label for="picture">
+                            <img src="/images/add-img.png" alt=""/>
+                        </label>
+                        <input style="display: none" id="picture" type="file" name="picture"/>
+                    </div>
+
+                    <div class="form-group mt-2 d-inline-block">
+                        <button class="btn-primary rounded">Upload Picture</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
-            <img src="/" class="card-img-top"  alt="Car image">
+        <div th:each="pictureUrl :${offerDetails.getPictures()}" class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+            <img th:src="${pictureUrl}" class="card-img-top"  alt="image">
         </div>
     </div>
 </div>

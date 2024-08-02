@@ -21,8 +21,8 @@ public class OfferEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
-    @OneToMany(targetEntity = PictureEntity.class, mappedBy = "offer")
-    private List<PictureEntity> pictures;
+    /*@OneToMany(targetEntity = PictureEntity.class, mappedBy = "offer")
+    private List<PictureEntity> pictures;*/
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
@@ -32,7 +32,7 @@ public class OfferEntity {
 
     public OfferEntity() {
         likes = 0l;
-        pictures = new ArrayList<>();
+        //pictures = new ArrayList<>();
     }
 
     public Long getId() {
@@ -89,12 +89,12 @@ public class OfferEntity {
         return this;
     }
 
-    public List<PictureEntity> getPictures() {
+    /*public List<PictureEntity> getPictures() {
         return pictures;
     }
 
     public OfferEntity setPictures(List<PictureEntity> pictures) {
         this.pictures = pictures;
         return this;
-    }
+    }*/
 }

@@ -1,5 +1,7 @@
 package bg.softuni.farmers_market.service.impl;
 
+import bg.softuni.farmers_market.model.dto.OfferDetailsDTO;
+import bg.softuni.farmers_market.model.entity.PictureEntity;
 import bg.softuni.farmers_market.repository.PictureRepository;
 import bg.softuni.farmers_market.service.PictureService;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,19 @@ public class PictureServiceImpl implements PictureService {
     @Override
     public List<String> getPictureUrlsByOfferId(Long id) {
         return pictureRepository
-                .findByOffer_Id(id)
+                .findAllByOfferId(id)
                 .stream()
-                .map(p -> p.getUrl())
+                .map(PictureEntity::getUrl)
                 .toList();
+    }
+
+    public void create(OfferDetailsDTO offerDetailsDTO, String picturePath) {
+        PictureEntity pictureEntity = new PictureEntity();
+
+        pictureEntity.setTitle(offerDetailsDTO.getName());
+        pictureEntity.setOfferId(pictureEntity.getOfferId());
+        pictureEntity.setUrl(picturePath);
+
+        pictureRepository.save(pictureEntity);
     }
 }

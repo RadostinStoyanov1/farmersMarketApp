@@ -1,6 +1,7 @@
 package bg.softuni.farmers_market.web;
 
 import bg.softuni.farmers_market.model.dto.AddOfferDTO;
+import bg.softuni.farmers_market.model.dto.UploadPictureDTO;
 import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 import bg.softuni.farmers_market.model.user.FarmersUserDetails;
 import bg.softuni.farmers_market.service.OfferService;
@@ -11,10 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -59,5 +58,22 @@ public class OfferController {
         offerService.createOffer(addOfferDTO);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/{id}")
+    public String offerDetails(@PathVariable("id") Long id,
+                               Model model) {
+
+        model.addAttribute("offerDetails", offerService.getOfferDetails(id));
+        model.addAttribute("uploadPictureDTO", new UploadPictureDTO());
+
+        return "details";
+    }
+
+    @PostMapping("/{id}/upload-picture")
+    public ModelAndView uploadPicture(@Valid UploadPictureDTO uploadPictureDTO) {
+        offerService.uploadPicture(uploadPictureDTO);
+
+        return new ModelAndView("redirect:/offers");
     }
 }

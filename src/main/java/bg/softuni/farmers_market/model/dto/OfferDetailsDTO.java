@@ -4,6 +4,7 @@ import bg.softuni.farmers_market.model.entity.PictureEntity;
 import bg.softuni.farmers_market.model.entity.ProductTypeEntity;
 import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OfferDetailsDTO {
@@ -11,9 +12,14 @@ public class OfferDetailsDTO {
     private ProductTypeEnum productType;
     private String description;
     private String name;
-    private List<PictureEntity> pictures;
+    private List<String> pictures;
+    private Long authorId;
     private String authorFullName;
     private Long likes;
+
+    public OfferDetailsDTO() {
+        this.pictures = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -51,11 +57,11 @@ public class OfferDetailsDTO {
         return this;
     }
 
-    public List<PictureEntity> getPictures() {
+    public List<String> getPictures() {
         return pictures;
     }
 
-    public OfferDetailsDTO setPictures(List<PictureEntity> pictures) {
+    public OfferDetailsDTO setPictures(List<String> pictures) {
         this.pictures = pictures;
         return this;
     }
@@ -75,6 +81,15 @@ public class OfferDetailsDTO {
 
     public OfferDetailsDTO setLikes(Long likes) {
         this.likes = likes;
+        return this;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public OfferDetailsDTO setAuthorId(Long authorId) {
+        this.authorId = authorId;
         return this;
     }
 }
