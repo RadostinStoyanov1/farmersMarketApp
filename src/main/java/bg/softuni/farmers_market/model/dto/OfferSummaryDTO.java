@@ -7,7 +7,6 @@ public class OfferSummaryDTO {
     private String name;
     private ProductTypeEnum productType;
     private String authorName;
-    private Long likes;
     private String pictureUrl;
 
     public Long getId() {
@@ -43,15 +42,6 @@ public class OfferSummaryDTO {
 
     public OfferSummaryDTO setAuthorName(String authorName) {
         this.authorName = authorName;
-        return this;
-    }
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public OfferSummaryDTO setLikes(Long likes) {
-        this.likes = likes;
         return this;
     }
 

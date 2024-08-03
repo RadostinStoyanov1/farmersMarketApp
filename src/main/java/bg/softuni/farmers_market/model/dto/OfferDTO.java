@@ -8,7 +8,6 @@ public class OfferDTO {
     private String description;
     private String name;
     private Long author;
-    private Long likes;
 
     public Long getId() {
         return id;
@@ -52,15 +51,6 @@ public class OfferDTO {
 
     public OfferDTO setAuthor(Long author) {
         this.author = author;
-        return this;
-    }
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public OfferDTO setLikes(Long likes) {
-        this.likes = likes;
         return this;
     }
 }

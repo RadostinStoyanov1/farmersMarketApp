@@ -29,14 +29,12 @@
                     <div class="card-text"><span>• Product type: <th:block th:text="${offerDetails.getProductType()}"></th:block></span></div>
                     <div class="card-text"><span>• Description: <th:block th:text="${offerDetails.getDescription()}"></th:block></span></div>
                     <div class="card-text"><span>• Author: <th:block th:text="${offerDetails.getAuthorFullName()}"></th:block></span></div>
-                    <div class="card-text"><span>• Likes: <th:block th:text="${offerDetails.getLikes()}"></th:block></span></div>
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" href="/">Like</a>
-                <a class="card-link" href="/">Delete</a>
-                <span class="col-auto ml-auto"> Upload picture:</span>
-                <form class="d-inline-block" th:action="@{/offers/upload-picture}" method="POST" th:object="${uploadPictureDTO}" enctype="multipart/form-data">
+                <a th:if="${canDelete}" class="card-link" href="/">Delete</a>
+                <span th:if="${canUpload}" class="col-auto ml-auto"> Upload picture:</span>
+                <form th:if="${canUpload}" class="d-inline-block" th:action="@{/offers/upload-picture}" method="POST" th:object="${uploadPictureDTO}" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="offerId" th:value="${offerDetails.id}">
                     <div class="image-upload d-inline-block">
                         <label for="picture">

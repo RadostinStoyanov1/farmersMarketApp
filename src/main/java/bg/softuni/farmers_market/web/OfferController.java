@@ -1,19 +1,16 @@
 package bg.softuni.farmers_market.web;
 
 import bg.softuni.farmers_market.model.dto.AddOfferDTO;
+import bg.softuni.farmers_market.model.dto.OfferDetailsDTO;
 import bg.softuni.farmers_market.model.dto.UploadPictureDTO;
 import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
-import bg.softuni.farmers_market.model.user.FarmersUserDetails;
 import bg.softuni.farmers_market.service.OfferService;
 import bg.softuni.farmers_market.service.ProductTypeService;
 import jakarta.validation.Valid;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -61,19 +58,22 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public String offerDetails(@PathVariable("id") Long id,
-                               Model model) {
+    public String offerDetails(@PathVariable Long id, Model model) {
+        OfferDetailsDTO currentOffer = offerService.getOfferDetails(id);
+        boolean canDelete = offerService.canDelete(currentOffer);
+        boolean canLike = offerService.canUpload(currentOffer);
 
-        model.addAttribute("offerDetails", offerService.getOfferDetails(id));
+        model.addAttribute("offerDetails", currentOffer);
         model.addAttribute("uploadPictureDTO", new UploadPictureDTO());
-
+        model.addAttribute("canLike", canLike);
+        model.addAttribute("canDelete", canDelete);
         return "details";
     }
 
-    @PostMapping("/{id}/upload-picture")
-    public ModelAndView uploadPicture(@Valid UploadPictureDTO uploadPictureDTO) {
+    @PostMapping("/upload-picture")
+    public String uploadPicture(@ModelAttribute @Valid UploadPictureDTO uploadPictureDTO) {;
         offerService.uploadPicture(uploadPictureDTO);
 
-        return new ModelAndView("redirect:/offers");
+        return ("redirect:/offers/all");
     }
 }

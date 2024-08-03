@@ -92,4 +92,6 @@ public class OfferDetailsDTO {
         this.authorId = authorId;
         return this;
     }
+
+
 }

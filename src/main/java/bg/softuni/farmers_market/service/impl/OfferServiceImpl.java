@@ -18,14 +18,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class OfferServiceImpl implements OfferService {
     private static final String DEFAULT_OFFER_PICTURE_URL = "/images/DefaultOfferPicture.jpg";
-    private static final String BASE_IMAGES_PATH = ".\\src\\main\\resources\\static\\images\\";
+    private static final String BASE_IMAGES_PATH = "./src/main/resources/static/images/";
     private final Logger LOGGER = LoggerFactory.getLogger(OfferServiceImpl.class);
     private final RestClient offerRestClient;
     private final UserHelperService userHelperService;
@@ -103,7 +102,7 @@ public class OfferServiceImpl implements OfferService {
             outputStream.write(pictureFile.getBytes());
 
 
-            pictureService.create(offerDetailsDTO, picturePath);
+            pictureService.create(offerDetailsDTO, "/images/" + picturePath);
 
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
@@ -133,7 +132,6 @@ public class OfferServiceImpl implements OfferService {
         offerSummaryDTO.setName(offerDTO.getName());
         offerSummaryDTO.setProductType(offerDTO.getProductType());
         offerSummaryDTO.setAuthorName(getFullName(author));
-        offerSummaryDTO.setLikes(offerDTO.getLikes());
         return offerSummaryDTO;
     }
 
@@ -174,10 +172,10 @@ public class OfferServiceImpl implements OfferService {
         return offerDetailsDTO;
     }
 
-    public boolean canLike (OfferDetailsDTO currentOffer) {
+    public boolean canUpload(OfferDetailsDTO currentOffer) {
         Long currentUserId = userHelperService.getUser().getId();
         Long authorId = currentOffer.getAuthorId();
-        if (currentUserId != authorId) {
+        if (currentUserId == authorId) {
             return true;
         }
         return false;
@@ -187,13 +185,13 @@ public class OfferServiceImpl implements OfferService {
         if (userHelperService.hasRole("ADMIN")) {
             return true;
         }
-        return !canLike(currentOffer); //canLike compares if the loggedUser is not author
+        return canUpload(currentOffer); //canLike compares if the loggedUser is not author
     }
 
     private String getPicturePath(MultipartFile pictureFile, String offerName) {
         String ext = getFileExtension(pictureFile.getOriginalFilename());
 
-        String pathPattern = "%s\\%s." + ext;
+        String pathPattern = "%s%s." + ext;
 
         return String.format(pathPattern,
                 transformOfferName(offerName),

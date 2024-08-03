@@ -29,9 +29,9 @@ public class PictureServiceImpl implements PictureService {
         PictureEntity pictureEntity = new PictureEntity();
 
         pictureEntity.setTitle(offerDetailsDTO.getName());
-        pictureEntity.setOfferId(pictureEntity.getOfferId());
+        pictureEntity.setOfferId(offerDetailsDTO.getId());
         pictureEntity.setUrl(picturePath);
 
-        pictureRepository.save(pictureEntity);
+        pictureRepository.saveAndFlush(pictureEntity);
     }
 }

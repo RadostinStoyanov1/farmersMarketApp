@@ -29,3 +29,4 @@ spring:
 offers:
     api:
         baseUrl: "http://localhost:8081"
+
