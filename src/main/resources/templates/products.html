@@ -16,30 +16,19 @@
 <div th:replace="~{fragments/navbar}"></div>
 
 <div class="container">
-    <h2 class="text-center text-white m-3">All Brands</h2>
-    <div class='row mb-4 d-flex justify-content-around'>
+    <h2 class="text-center text-white m-3">All Products</h2>
+    <div class='row mb-4 d-xl-flex text-center justify-content-around'>
         <div  class="brand-section col-md-5 mr-auto d-flex flex-column">
-            <h2>Car brand:
-                <span >Brand name</span>
+            <h2>Product Types:
             </h2>
-            <div>Models:
+            <div>
                 <table>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Start Year</th>
-                        <th>End Year</th>
-                        <th>Picture</th>
-                    </tr>
-                    <tr>
-                        <th>No</th>
-                        <th >Model Name</th>
-                        <th >Model Category</th>
-                        <th >Model Start Year</th>
-                        <th >Model End Year</th>
-                        <th><img alt="image" src="/"
-                                 class="img-thumbnail rounded"></th>
+                    <tr th:each="type: ${allProductTypes}">
+                        <div>
+                            <a class="card-link d-inline-block" th:href="@{/offers/all/{path}(path=${type})}">
+                                <th:block th:text="${type}"></th:block>
+                            </a>
+                        </div>
                     </tr>
                 </table>
             </div>

@@ -5,7 +5,7 @@ import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 public class OfferSummaryDTO {
     private Long id;
     private String name;
-    private ProductTypeEnum productType;
+    private String productType;
     private String authorName;
     private String pictureUrl;
 
@@ -27,11 +27,11 @@ public class OfferSummaryDTO {
         return this;
     }
 
-    public ProductTypeEnum getProductType() {
+    public String getProductType() {
         return productType;
     }
 
-    public OfferSummaryDTO setProductType(ProductTypeEnum productType) {
+    public OfferSummaryDTO setProductType(String productType) {
         this.productType = productType;
         return this;
     }

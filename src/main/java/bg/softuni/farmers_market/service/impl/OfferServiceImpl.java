@@ -2,6 +2,7 @@ package bg.softuni.farmers_market.service.impl;
 
 import bg.softuni.farmers_market.model.dto.*;
 import bg.softuni.farmers_market.model.entity.UserEntity;
+import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 import bg.softuni.farmers_market.service.OfferService;
 import bg.softuni.farmers_market.service.PictureService;
 import bg.softuni.farmers_market.service.UserService;
@@ -114,6 +115,13 @@ public class OfferServiceImpl implements OfferService {
 
     }
 
+    public List<OfferSummaryDTO> getAllOffersByType(String productType) {
+        return getAllOffersSummary()
+                .stream()
+                .filter(o -> o.getProductType().equals(productType))
+                .toList();
+    }
+
     private OfferSummaryDTO convertOfferDTOToOfferSummaryDTO(OfferDTO offerDTO) {
         List<String> pictureUrls = pictureService.getPictureUrlsByOfferId(offerDTO.getId());
 
@@ -130,7 +138,7 @@ public class OfferServiceImpl implements OfferService {
         offerSummaryDTO.setId(offerDTO.getId());
         offerSummaryDTO.setPictureUrl(pictureUrl);
         offerSummaryDTO.setName(offerDTO.getName());
-        offerSummaryDTO.setProductType(offerDTO.getProductType());
+        offerSummaryDTO.setProductType(offerDTO.getProductType().toString());
         offerSummaryDTO.setAuthorName(getFullName(author));
         return offerSummaryDTO;
     }

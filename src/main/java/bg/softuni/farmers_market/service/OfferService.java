@@ -4,6 +4,7 @@ import bg.softuni.farmers_market.model.dto.AddOfferDTO;
 import bg.softuni.farmers_market.model.dto.OfferDetailsDTO;
 import bg.softuni.farmers_market.model.dto.OfferSummaryDTO;
 import bg.softuni.farmers_market.model.dto.UploadPictureDTO;
+import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface OfferService {
     public boolean canUpload(OfferDetailsDTO currentOffer);
 
     public boolean canDelete (OfferDetailsDTO currentOffer);
+
+    public List<OfferSummaryDTO> getAllOffersByType(String productType);
 
 }

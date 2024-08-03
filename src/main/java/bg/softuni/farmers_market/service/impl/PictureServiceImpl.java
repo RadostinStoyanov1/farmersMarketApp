@@ -33,5 +33,6 @@ public class PictureServiceImpl implements PictureService {
         pictureEntity.setUrl(picturePath);
 
         pictureRepository.saveAndFlush(pictureEntity);
+
     }
 }
