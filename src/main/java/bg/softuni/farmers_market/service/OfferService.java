@@ -19,5 +19,6 @@ public interface OfferService {
     public boolean canDelete (OfferDetailsDTO currentOffer);
 
     public List<OfferSummaryDTO> getAllOffersByType(String productType);
+    public List<OfferSummaryDTO> getMyOffersSummary();
 
 }

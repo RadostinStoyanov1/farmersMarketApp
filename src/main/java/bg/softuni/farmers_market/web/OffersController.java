@@ -33,4 +33,11 @@ public class OffersController {
         model.addAttribute("allOffers", offerService.getAllOffersByType(type));
         return "offers";
     }
+
+    @GetMapping("/my")
+    public String getMyOffers(Model model) {
+
+        model.addAttribute("allOffers", offerService.getMyOffersSummary());
+        return "my-offers";
+    }
 }

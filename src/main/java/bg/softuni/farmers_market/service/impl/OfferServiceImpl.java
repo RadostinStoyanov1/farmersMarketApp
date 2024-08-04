@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -57,19 +58,12 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public List<OfferSummaryDTO> getAllOffersSummary() {
         LOGGER.info("Get all offers...");
-        List<OfferDTO> incomingOffers = offerRestClient
-                .get()
-                .uri("/offers")
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .body(new ParameterizedTypeReference<>(){});
+        List<OfferDTO> incomingOffers = getALlOffersAsOfferDTO();
 
-        List<OfferSummaryDTO> allOffers = incomingOffers
+        return incomingOffers
                 .stream()
                 .map(this::convertOfferDTOToOfferSummaryDTO)
                 .toList();
-
-        return allOffers;
     }
 
     @Override
@@ -124,6 +118,16 @@ public class OfferServiceImpl implements OfferService {
         return getAllOffersSummary()
                 .stream()
                 .filter(o -> o.getProductType().equals(productType))
+                .toList();
+    }
+
+    public List<OfferSummaryDTO> getMyOffersSummary() {
+        Long userId = userHelperService.getUser().getId();
+
+        return getALlOffersAsOfferDTO()
+                .stream()
+                .filter(o -> Objects.equals(o.getAuthor(), userId))
+                .map(this::convertOfferDTOToOfferSummaryDTO)
                 .toList();
     }
 
@@ -218,5 +222,14 @@ public class OfferServiceImpl implements OfferService {
     private String getFileExtension(String fileName) {
         String[] splitPictureName = fileName.split("\\.");
         return splitPictureName[splitPictureName.length - 1];
+    }
+
+    private List<OfferDTO> getALlOffersAsOfferDTO() {
+        return offerRestClient
+                .get()
+                .uri("/offers")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>(){});
     }
 }
