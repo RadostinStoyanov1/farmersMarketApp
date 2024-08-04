@@ -8,6 +8,7 @@ import bg.softuni.farmers_market.service.OfferService;
 import bg.softuni.farmers_market.service.ProductTypeService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -62,11 +63,11 @@ public class OfferController {
     public String offerDetails(@PathVariable Long id, Model model) {
         OfferDetailsDTO currentOffer = offerService.getOfferDetails(id);
         boolean canDelete = offerService.canDelete(currentOffer);
-        boolean canLike = offerService.canUpload(currentOffer);
+        boolean canUpload = offerService.canUpload(currentOffer);
 
         model.addAttribute("offerDetails", currentOffer);
         model.addAttribute("uploadPictureDTO", new UploadPictureDTO());
-        model.addAttribute("canLike", canLike);
+        model.addAttribute("canUpload", canUpload);
         model.addAttribute("canDelete", canDelete);
         return "details";
     }
@@ -78,4 +79,11 @@ public class OfferController {
         return ("redirect:/offers/all");
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteOffer(@PathVariable("id") Long id) {
+
+        offerService.deleteOffer(id);
+
+        return "redirect:/offers/all";
+    }
 }

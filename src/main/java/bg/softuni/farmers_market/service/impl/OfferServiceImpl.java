@@ -112,7 +112,12 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public void deleteOffer(Long id) {
+        offerRestClient
+                .delete()
+                .uri("/offers/{id}", id)
+                .retrieve();
 
+        pictureService.deletePicturesByOfferId(id);
     }
 
     public List<OfferSummaryDTO> getAllOffersByType(String productType) {

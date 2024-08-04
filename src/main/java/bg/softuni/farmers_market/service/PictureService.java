@@ -7,4 +7,6 @@ import java.util.List;
 public interface PictureService {
     public List<String> getPictureUrlsByOfferId(Long id);
     public void create(OfferDetailsDTO offerDetailsDTO, String picturePath);
+
+    public void deletePicturesByOfferId(Long offerId);
 }

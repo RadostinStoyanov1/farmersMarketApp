@@ -35,4 +35,8 @@ public class PictureServiceImpl implements PictureService {
         pictureRepository.saveAndFlush(pictureEntity);
 
     }
+
+    public void deletePicturesByOfferId(Long offerId) {
+        pictureRepository.deleteByOfferId(offerId);
+    }
 }

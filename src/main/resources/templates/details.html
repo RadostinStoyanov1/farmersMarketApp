@@ -32,7 +32,12 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a th:if="${canDelete}" class="card-link" href="/">Delete</a>
+                <form class="d-inline-block" th:if="${canDelete}"
+                      th:method="DELETE"
+                      th:action="@{/offers/{id}(id=${offerDetails.getId()})}">
+                    <button class="btn btn-danger" type="submit" th:text="'Delete'"></button>
+                </form>
+                <!--<a th:if="${canDelete}" class="card-link" href="/">Delete</a>-->
                 <span th:if="${canUpload}" class="col-auto ml-auto"> Upload picture:</span>
                 <form th:if="${canUpload}" class="d-inline-block" th:action="@{/offers/upload-picture}" method="POST" th:object="${uploadPictureDTO}" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="offerId" th:value="${offerDetails.id}">
