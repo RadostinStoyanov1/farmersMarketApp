@@ -20,4 +20,23 @@ public class HomeController {
 
         return "index";
     }
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @GetMapping("/advices")
+    public String advices() {
+        return "advices";
+    }
+
+    @GetMapping("/news")
+    public String news() {
+        return "news";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
 }
