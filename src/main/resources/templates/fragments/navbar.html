@@ -71,7 +71,17 @@
                         <input class="btn btn-link" type="submit" value="Logout" />
                     </form>
                 </li>
-
+                <li class="nav-item">
+                    <form th:method="get">
+                        <label class="text-white" for="lang" th:text="#{nav_bar_language}">Language</label>
+                        <select id="lang"
+                                name="lang"
+                                onchange="this.form.submit()">
+                            <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                            <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+                        </select>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
