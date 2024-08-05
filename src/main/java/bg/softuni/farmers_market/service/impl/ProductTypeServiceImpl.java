@@ -17,11 +17,10 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 
     @Override
     public ProductTypeEnum[] getAllProductTypes() {
-        ProductTypeEnum[] productTypes = productTypeRepository
+        return productTypeRepository
                 .findAll()
                 .stream()
                 .map(ProductTypeEntity::getProductType)
                 .toArray(ProductTypeEnum[]::new);
-        return productTypes;
     }
 }

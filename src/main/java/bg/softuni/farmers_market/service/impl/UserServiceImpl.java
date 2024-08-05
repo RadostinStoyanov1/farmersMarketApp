@@ -6,7 +6,9 @@ import bg.softuni.farmers_market.model.enums.UserRoleEnum;
 import bg.softuni.farmers_market.repository.UserRepository;
 import bg.softuni.farmers_market.repository.UserRoleRepository;
 import bg.softuni.farmers_market.service.UserService;
+import bg.softuni.farmers_market.service.exception.UserNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,12 +46,17 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    public UserEntity getUserByUsername(String username) {
-        return userRepository.findByUsername(username).get();
+    public UserEntity getUserByUsername(String email) {
+        return userRepository
+                .findByUsername(email)
+                .orElseThrow(
+                () -> new UsernameNotFoundException("User with email " + email + " not found!"));
     }
 
     @Override
     public UserEntity getUserById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository
+                .findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 }

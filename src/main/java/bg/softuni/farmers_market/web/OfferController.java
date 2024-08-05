@@ -6,7 +6,9 @@ import bg.softuni.farmers_market.model.dto.UploadPictureDTO;
 import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 import bg.softuni.farmers_market.service.OfferService;
 import bg.softuni.farmers_market.service.ProductTypeService;
+import bg.softuni.farmers_market.service.exception.OfferNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -86,4 +88,14 @@ public class OfferController {
 
         return "redirect:/offers/all";
     }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(OfferNotFoundException.class)
+    public ModelAndView handleObjectNotFound(OfferNotFoundException onfe) {
+        ModelAndView modelAndView = new ModelAndView("offer-not-found");
+        modelAndView.addObject("offerId", String.valueOf(onfe.getId()));
+
+        return modelAndView;
+    }
+
 }

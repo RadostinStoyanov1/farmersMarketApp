@@ -30,10 +30,6 @@ public class UserHelperService {
         return (UserDetails) getAuthentication().getPrincipal();
     }
 
-    public boolean isAuthenticated() {
-        return !hasRole("ANONYMOUS");
-    }
-
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }

@@ -2,14 +2,15 @@ package bg.softuni.farmers_market.service.impl;
 
 import bg.softuni.farmers_market.model.dto.*;
 import bg.softuni.farmers_market.model.entity.UserEntity;
-import bg.softuni.farmers_market.model.enums.ProductTypeEnum;
 import bg.softuni.farmers_market.service.OfferService;
 import bg.softuni.farmers_market.service.PictureService;
 import bg.softuni.farmers_market.service.UserService;
+import bg.softuni.farmers_market.service.exception.OfferNotFoundException;
 import bg.softuni.farmers_market.service.helper.UserHelperService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -73,11 +74,17 @@ public class OfferServiceImpl implements OfferService {
                 .uri("/offers/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(s -> s.isSameCodeAs(HttpStatusCode.valueOf(404)),
+                        (req, resp) -> {
+                            throw new OfferNotFoundException("Offer with id: " + id + "was not found", id);
+                        })
                 .body(OfferDTO.class);
 
-        OfferDetailsDTO offerDetailsDTO = convertOfferDTOToOfferDetailsDTO(offerDTO);
+        if (offerDTO == null) {
+            throw new OfferNotFoundException("Offer with id: " + id + "was not found", id);
+        }
 
-        return offerDetailsDTO;
+        return convertOfferDTOToOfferDetailsDTO(offerDTO);
     }
 
     @Override
@@ -190,12 +197,9 @@ public class OfferServiceImpl implements OfferService {
     }
 
     public boolean canUpload(OfferDetailsDTO currentOffer) {
-        Long currentUserId = userHelperService.getUser().getId();
+        long currentUserId = userHelperService.getUser().getId();
         Long authorId = currentOffer.getAuthorId();
-        if (currentUserId == authorId) {
-            return true;
-        }
-        return false;
+        return currentUserId == authorId;
     }
 
     public boolean canDelete (OfferDetailsDTO currentOffer) {
