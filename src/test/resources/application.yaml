@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: farmers-market
+  datasource:
+    url: jdbc:hsqldb:mem:offers;sql.syntax_mys=true
+    driver-class-name: org.hsqldb.jdbcDriver
+    username: root
+    password: 77DoR1&
+  jpa:
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: never
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+offers:
+  api:
+    baseUrl: "http://localhost:8081"

@@ -16,7 +16,7 @@ public class OfferEntity {
     @JoinColumn(name = "product_type_id", referencedColumnName = "id")
     private ProductTypeEntity productType;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
     @Column(name = "name", nullable = false)
