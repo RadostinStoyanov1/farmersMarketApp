@@ -46,13 +46,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    public UserEntity getUserByUsername(String email) {
-        return userRepository
-                .findByUsername(email)
-                .orElseThrow(
-                () -> new UsernameNotFoundException("User with email " + email + " not found!"));
-    }
-
     @Override
     public UserEntity getUserById(Long id) {
         return userRepository

@@ -29,12 +29,9 @@ public class UserEntity {
          inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<UserRoleEntity> roles;
-    @OneToMany(mappedBy = "author")
-    private List<OfferEntity> offers;
 
     public UserEntity() {
         roles = new ArrayList<>();
-        offers = new ArrayList<>();
     }
 
     public long getId() {
@@ -97,15 +94,6 @@ public class UserEntity {
 
     public UserEntity setRoles(List<UserRoleEntity> roles) {
         this.roles = roles;
-        return this;
-    }
-
-    public List<OfferEntity> getOffers() {
-        return offers;
-    }
-
-    public UserEntity setOffers(List<OfferEntity> offers) {
-        this.offers = offers;
         return this;
     }
 }

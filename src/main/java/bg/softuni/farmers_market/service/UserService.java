@@ -9,6 +9,5 @@ public interface UserService {
 
     public void register(UserRegisterDTO userRegisterDTO);
 
-    public UserEntity getUserByUsername(String username);
     public UserEntity getUserById(Long id);
 }

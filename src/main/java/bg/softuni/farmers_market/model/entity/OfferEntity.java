@@ -25,7 +25,6 @@ public class OfferEntity {
     private List<PictureEntity> pictures;*/
 
     @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private UserEntity author;
     @Column(name = "likes")
     private Long likes;
