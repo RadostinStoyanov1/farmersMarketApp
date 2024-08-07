@@ -23,4 +23,4 @@ spring:
 
 offers:
   api:
-    baseUrl: "http://localhost:8081"
+    baseUrl: "http://exampleoftest.com"

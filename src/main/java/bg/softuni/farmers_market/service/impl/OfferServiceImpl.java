@@ -1,5 +1,6 @@
 package bg.softuni.farmers_market.service.impl;
 
+import bg.softuni.farmers_market.config.OfferApiConfig;
 import bg.softuni.farmers_market.model.dto.*;
 import bg.softuni.farmers_market.model.entity.UserEntity;
 import bg.softuni.farmers_market.service.OfferService;
@@ -33,12 +34,14 @@ public class OfferServiceImpl implements OfferService {
     private final UserHelperService userHelperService;
     private final PictureService pictureService;
     private final UserService userService;
+    private final OfferApiConfig offerApiConfig;
 
-    public OfferServiceImpl(RestClient offerRestClient, UserHelperService userHelperService, PictureService pictureService, UserService userService) {
+    public OfferServiceImpl(RestClient offerRestClient, UserHelperService userHelperService, PictureService pictureService, UserService userService, OfferApiConfig offerApiConfig) {
         this.offerRestClient = offerRestClient;
         this.userHelperService = userHelperService;
         this.pictureService = pictureService;
         this.userService = userService;
+        this.offerApiConfig = offerApiConfig;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class OfferServiceImpl implements OfferService {
 
         offerRestClient
                 .post()
-                .uri("/offers") // uri without baseUrl"http://localhost:8081/offers"
+                .uri("/offers")
                 .body(addOfferDTO)
                 .retrieve();
     }
@@ -71,7 +74,7 @@ public class OfferServiceImpl implements OfferService {
     public OfferDetailsDTO getOfferDetails(Long id) {
         OfferDTO offerDTO = offerRestClient
                 .get()
-                .uri("/offers/{id}", id)
+                .uri(offerApiConfig.getBaseUrl() + "/offers/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .onStatus(s -> s.isSameCodeAs(HttpStatusCode.valueOf(404)),
@@ -191,7 +194,6 @@ public class OfferServiceImpl implements OfferService {
         offerDetailsDTO.setDescription(offerDTO.getDescription());
         offerDetailsDTO.setAuthorFullName(getFullName(author));
         offerDetailsDTO.setAuthorId(offerDTO.getAuthor());
-        offerDetailsDTO.setLikes(offerDetailsDTO.getLikes());
 
         return offerDetailsDTO;
     }
@@ -228,10 +230,10 @@ public class OfferServiceImpl implements OfferService {
         return splitPictureName[splitPictureName.length - 1];
     }
 
-    private List<OfferDTO> getALlOffersAsOfferDTO() {
+    public List<OfferDTO> getALlOffersAsOfferDTO() {
         return offerRestClient
                 .get()
-                .uri("/offers")
+                .uri(offerApiConfig.getBaseUrl() + "/offers")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>(){});

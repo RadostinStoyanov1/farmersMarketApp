@@ -15,7 +15,6 @@ public class OfferDetailsDTO {
     private List<String> pictures;
     private Long authorId;
     private String authorFullName;
-    private Long likes;
 
     public OfferDetailsDTO() {
         this.pictures = new ArrayList<>();
@@ -72,15 +71,6 @@ public class OfferDetailsDTO {
 
     public OfferDetailsDTO setAuthorFullName(String authorFullName) {
         this.authorFullName = authorFullName;
-        return this;
-    }
-
-    public Long getLikes() {
-        return likes;
-    }
-
-    public OfferDetailsDTO setLikes(Long likes) {
-        this.likes = likes;
         return this;
     }
 
